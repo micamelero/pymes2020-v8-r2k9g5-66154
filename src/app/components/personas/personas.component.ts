@@ -41,14 +41,15 @@ export class PersonasComponent implements OnInit {
       Limite: [null, [Validators.required]],
     });
 
- this.GetPersonas();
+ this.getPersonas();
 }
-GetPersonas(){
-this.personasService.get().suscribe(res => [
-this.Lista = res
-]);
+getPersonas() { 
 
-}
+this.personasService.get().subscribe((res: Personas[]) => {
+this.Lista = res
+});
+
+  }
 Consultar(){
  this.AccionABMC = "C";
 

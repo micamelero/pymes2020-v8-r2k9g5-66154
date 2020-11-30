@@ -24,7 +24,7 @@
               	<th class="text-center">ID</th>
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Fecha de Nacimiento</th>
-                <th class="text-center">Telefono</th>
+                <th class="text-center">Limite</th>
              
             </tr>
         </thead>
@@ -33,7 +33,7 @@
                 <td>{{dto.IdContacto}}</td>
                 <td>{{dto.Nombre | uppercase}}</td>
                 <td>{{dto.FechaNacimiento| date:'dd/MM/yyyy'}}</td> 
-                <td class="text-right">{{dto.Telefono }}</td>            
+                <td class="text-right">{{dto.Limite }}</td>            
             </tr>
         </tbody>
     </table>
@@ -76,17 +76,17 @@
             </div>
   </div>
   <div class="row form-group">
-            <label class="col-form-label col-sm-2 col-sm-offset-2" for="Telefono">
-                Telefono <span class="text-danger" >*</span>
+            <label class="col-form-label col-sm-2 col-sm-offset-2" for="Limite">
+                Limite <span class="text-danger" >*</span>
             </label>
             <div class="col-sm-6">
-                <input type="text" name="Telefono" class="form-control" formControlName="Telefono" [ngClass]="{'is-invalid': (FormReg.controls.Telefono.touched || submitted)  
-                && FormReg.controls.Telefono.errors}" />
-                <span class="text-danger" *ngIf="(FormReg.controls.Telefono.touched || submitted) && FormReg.controls.Telefono.errors?.required">
+                <input type="text" name="Limite" class="form-control" formControlName="Limite" [ngClass]="{'is-invalid': (FormReg.controls.Limite.touched || submitted)  
+                && FormReg.controls.Limite.errors}" />
+                <span class="text-danger" *ngIf="(FormReg.controls.Limite.touched || submitted) && FormReg.controls.Limite.errors?.required">
                     Dato requerido.
                 </span>
 
-                <span class="text-danger" *ngIf="FormReg.controls.Telefono.errors?.pattern">Dato numerico de 10 digitos</span>
+                <span class="text-danger" *ngIf="FormReg.controls.Limite.errors?.pattern">Dato numerico </span>
             </div>
   </div>
 </fieldset>
