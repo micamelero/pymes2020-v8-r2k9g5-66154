@@ -37,7 +37,7 @@ export class PersonasComponent implements OnInit {
       //ANGULAR VA A BUILDEAR PROPIEDAD DEL OBJETO CON EL VALOR DEL ELEMENTO HTML
       IdPersona: [null],
       Nombre: [null, [Validators.required, Validators.maxLength(30)]],
-      FechaNacimiento: [null, [Validators.required,Validators.pattern("(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}") ]],
+      FecNacimiento: [null, [Validators.required,Validators.pattern("(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}") ]],
       Limite: [null, [Validators.required]],
     });
 
@@ -75,7 +75,7 @@ Agregar(){
     
     var arrFecha = itemCopy.FechaNacimiento.substr(0, 10).split("/");
     if (arrFecha.length == 3)
-      itemCopy.FechaNacimiento = 
+      itemCopy.FecNacimiento = 
           new Date(
           arrFecha[2],
           arrFecha[1] - 1,
@@ -85,8 +85,8 @@ Agregar(){
                    
     // agregar post
     //SI NO HAY ID ES ALTA 
-    if (itemCopy.IdContacto == 0 || itemCopy.IdContacto == null) {
-      itemCopy.IdContacto = 0;
+    if (itemCopy.IdPersona == 0 || itemCopy.IdPersona == null) {
+      itemCopy.IdPersona = 0;
       this.personasService.post(itemCopy).subscribe((res: any) => {
         this.Volver();
         this.modalDialogService.Alert("Registro agregado correctamente.");
@@ -94,7 +94,7 @@ Agregar(){
     } else {
       // modificar put
       this.personasService
-        .put(itemCopy.IdContacto, itemCopy)
+        .put(itemCopy.IdPersona, itemCopy)
         .subscribe((res: any) => {
           this.Volver();
           this.modalDialogService.Alert("Registro modificado correctamente.");

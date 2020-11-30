@@ -1,6 +1,6 @@
 export class Personas {
   IdPersona: number;
 	Nombre: string;
-	FechaNacimiento: Date;
+	FecNacimiento: Date;
 	Limite: number;
 }
