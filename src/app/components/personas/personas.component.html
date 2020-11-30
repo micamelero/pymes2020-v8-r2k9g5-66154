@@ -67,12 +67,12 @@
                 Fecha de Nacimiento <span class="text-danger" >*</span>
             </label>
             <div class="col-sm-6">
-                <input class="form-control" name="FechaNacimiento" formControlName="FechaNacimiento" [ngClass]="{'is-invalid': (FormReg.controls.FechaNacimiento.touched || submitted)  
-                && FormReg.controls.FechaNacimiento.errors}"/>
-                <span class="text-danger" *ngIf="(FormReg.controls.FechaNacimiento.touched || submitted) && FormReg.controls.FechaNacimiento.errors?.required">
+                <input class="form-control" name="FecNacimiento" formControlName="FecNacimiento" [ngClass]="{'is-invalid': (FormReg.controls.FecNacimiento.touched || submitted)  
+                && FormReg.controls.FecNacimiento.errors}"/>
+                <span class="text-danger" *ngIf="(FormReg.controls.FecNacimiento.touched || submitted) && FormReg.controls.FecNacimiento.errors?.required">
                     Dato requerido.
                 </span>
-                <span class="text-danger" *ngIf="FormReg.controls.FechaNacimiento.errors?.pattern">Dato fecha, formato dd/mm/aaaa. </span>
+                <span class="text-danger" *ngIf="FormReg.controls.FecNacimiento.errors?.pattern">Dato fecha, formato dd/mm/aaaa. </span>
             </div>
   </div>
   <div class="row form-group">

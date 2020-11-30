@@ -73,7 +73,7 @@ Agregar(){
     
     const itemCopy = { ...this.FormReg.value }; 
     
-    var arrFecha = itemCopy.FechaNacimiento.substr(0, 10).split("/");
+    var arrFecha = itemCopy.FecNacimiento.substr(0, 10).split("/");
     if (arrFecha.length == 3)
       itemCopy.FecNacimiento = 
           new Date(
