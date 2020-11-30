@@ -1,0 +1,111 @@
+
+<h3>{{Titulo}} <small>{{TituloAccionABMC[AccionABMC]}}</small></h3>
+<div id="botonConsultar"  *ngIf="AccionABMC == 'L'" >
+<div class="row justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="Consultar();" >
+            <!-- INHABILITO EL BOTON BUSCAR CUANDO LAS VALIDACIONES DEL FORMULARIO FILTRO SEAN OPUESTAS A VALIDOS--> 
+            <span class="fas fa-search"> </span> Consultar
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-primary" (click)="Agregar()">
+            <span class="fas fa-plus"> </span>
+            Agregar
+        </button>
+    </div>
+<!-- <button type="button" class="btn btn-primary" (click)="Consultar()" >Consultar</button> -->
+
+</div>
+
+<div id="divTablaResultados" *ngIf="AccionABMC == 'C' ">
+   
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+              	<th class="text-center">ID</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Fecha de Nacimiento</th>
+                <th class="text-center">Telefono</th>
+             
+            </tr>
+        </thead>
+         <tbody>
+            <tr *ngFor="let dto of Lista">
+                <td>{{dto.IdContacto}}</td>
+                <td>{{dto.Nombre | uppercase}}</td>
+                <td>{{dto.FechaNacimiento| date:'dd/MM/yyyy'}}</td> 
+                <td class="text-right">{{dto.Telefono }}</td>            
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" (click)="Agregar()" >Agregar</button>
+    </div>
+<form name="FormReg" [formGroup]="FormReg" class="bg-light" *ngIf="AccionABMC == 'A'">
+  	<fieldset [disabled]="AccionABMC==='C'">
+<!--  <div id="divAgregarContactos" *ngIf="AccionABMC == 'A' ">-->
+     <div class="form-group row" *ngIf="AccionABMC == 'A' ">
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">
+                Nombre <span class="text-danger" >*</span>
+               <!-- con ngIf validamos que cumpla con la validacion asignada en ngOninit. Min 4 caract y max 55 -->
+      </label>
+      <div class="col-sm-6">
+                <input type="text" class="form-control text-uppercase" formControlName="Nombre" [ngClass]="{'is-invalid': (FormReg.controls.Nombre.touched || submitted)  
+                && FormReg.controls.Nombre.errors}" 
+    /> <!-- ng class es de bootstrap para ponerle color rojo al input cuando no cumpla validaciones-->
+                <span class="text-danger" *ngIf="(FormReg.controls.Nombre.touched || submitted) && FormReg.controls.Nombre.errors?.required">
+                    Dato requerido.
+                </span> <!--FormReg.controls.Nombre.errors ES SI EXISTE LA VARIABLE-->
+                <span class="text-danger" *ngIf= "FormReg.controls.Nombre.errors?.minlength || FormReg.controls.Nombre.errors?.maxlength">Debe ingresar nombre de 4 a 55 caracteres</span>
+                <!--FormReg.controls.Nombre.errors?.minlength ES SI EL NOMBRE TIENE LA CANTIDAD MINIMA DE CARACTERES ESTABLECIDA -->
+          
+               <!-- <small *ngIf="FormReg.controls.Nombre.invalid && (FormReg.controls.Nombre.pristine || FormReg.controls.Nombre.touched)">Ingrese el nombre</small> -->
+    </div>
+  </div> 
+  
+  <div class="form-group row">
+            <label class="col-form-label col-sm-2 col-sm-offset-2">
+                Fecha de Nacimiento <span class="text-danger" >*</span>
+            </label>
+            <div class="col-sm-6">
+                <input class="form-control" name="FechaNacimiento" formControlName="FechaNacimiento" [ngClass]="{'is-invalid': (FormReg.controls.FechaNacimiento.touched || submitted)  
+                && FormReg.controls.FechaNacimiento.errors}"/>
+                <span class="text-danger" *ngIf="(FormReg.controls.FechaNacimiento.touched || submitted) && FormReg.controls.FechaNacimiento.errors?.required">
+                    Dato requerido.
+                </span>
+                <span class="text-danger" *ngIf="FormReg.controls.FechaNacimiento.errors?.pattern">Dato fecha, formato dd/mm/aaaa. </span>
+            </div>
+  </div>
+  <div class="row form-group">
+            <label class="col-form-label col-sm-2 col-sm-offset-2" for="Telefono">
+                Telefono <span class="text-danger" >*</span>
+            </label>
+            <div class="col-sm-6">
+                <input type="text" name="Telefono" class="form-control" formControlName="Telefono" [ngClass]="{'is-invalid': (FormReg.controls.Telefono.touched || submitted)  
+                && FormReg.controls.Telefono.errors}" />
+                <span class="text-danger" *ngIf="(FormReg.controls.Telefono.touched || submitted) && FormReg.controls.Telefono.errors?.required">
+                    Dato requerido.
+                </span>
+
+                <span class="text-danger" *ngIf="FormReg.controls.Telefono.errors?.pattern">Dato numerico de 10 digitos</span>
+            </div>
+  </div>
+</fieldset>
+  <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary"  *ngIf=" AccionABMC == 'A' "(click)="Grabar()"
+           >
+            <!-- SOLO VISIBLE BOTON GRABAR CUANDO LA ACCION SEA AGREGAR O MODIFICAR-->
+            <span class="fas fa-check"></span> Grabar
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-warning" (click)="Volver()">
+            <span class="fas fa-undo"></span> {{AccionABMC=='L' ? 'Cancelar' : 'Volver'}}
+            <!-- BOTON QUE DIGA CANCELAR CUANDO ACCION SE AGREGAR O MODIFICAR
+            Y BOTON VOLVER CUANDO LA ACCION SEA CONSULTAR U OTRA-->
+        </button>
+    </div>
+<!--</div>-->
+<div id="divMsjFormRegistro" class="row alert alert-danger" *ngIf="submitted &&FormReg.invalid">
+        <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+    </div>
+
+</form>
