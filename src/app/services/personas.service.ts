@@ -8,7 +8,7 @@ import {
 import { of } from "rxjs";
 import { Personas } from "../models/personas";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class PersonasService {
 resourceUrl: string;
   constructor(private httpClient: HttpClient) {

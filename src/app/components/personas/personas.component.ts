@@ -31,7 +31,7 @@ export class PersonasComponent implements OnInit {
   AccionABMC = "L"; 
 
   ngOnInit() {
-
+  this.getPersonas();
     this.FormReg = this.formBuilder.group({
        //CREA OBJETO CUYAS PROPIEDADES ESTAN VINCULADAS AL HTML, A LA VARIABLE FORMREG
       //ANGULAR VA A BUILDEAR PROPIEDAD DEL OBJETO CON EL VALOR DEL ELEMENTO HTML
@@ -41,13 +41,12 @@ export class PersonasComponent implements OnInit {
       Limite: [null, [Validators.required]],
     });
 
- this.getPersonas();
+ 
 }
 getPersonas() { 
-
 this.personasService.get().subscribe((res: Personas[]) => {
-this.Lista = res
-});
+      this.Lista = res;
+    });
 
   }
 Consultar(){
