@@ -18,6 +18,10 @@ resourceUrl: string;
     return this.httpClient.get(this.resourceUrl);
   
   }
+  getById(Id: number) { 
+    return this.httpClient.get(this.resourceUrl + Id);
+     
+  }
   post(obj: Personas) {
     return this.httpClient.post(this.resourceUrl, obj);
    
